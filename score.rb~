@@ -1,0 +1,60 @@
+def score(dice)
+#return 0 if dice is not an array or an empty array or an array with more than 5 elements
+  return 0 if !dice.is_a?(Array) or dice.length=0 or dice.length>5
+#return 0 if the elements of the array are not numbers from 1 to 6
+
+#initialize score to 0
+  score=0
+#create a hash with keys from 1 to 6 with the values 0
+#the value will be the number of occurrences of the key number
+  cnt={}
+  (1..6).each do |i| cnt[i]=0 end
+#scan dice and count the occurrences of each number
+  dice.each do |n| cnt[n]+=1
+#find any number with 3 or more occurrences
+  cnt.each {|k,v| 
+    if v>2
+#if the number is 1 then increase score by 1000
+       if k==1
+         score+=1000
+         else
+#if the number is [2,6] multiply it by 100
+	  score+=k*100
+         end
+#subtract 3 from the element's count and replace it in the hash
+       v -= 3
+    end
+#    if k==1 {score+=100*v}
+#    if k==5 {score+=50*v}
+   }
+    score+=100*cnt[1]+50*cnt[5]
+
+  score 
+# You need to write this method
+end
+
+
+  puts score([])
+
+  puts score([5])
+
+  puts score([1])
+
+  puts  score([1,5,5,1])
+
+  puts score([2,3,4,6])
+
+  puts score([1,1,1])
+
+  puts score([2,2,2])
+  puts score([3,3,3])
+  puts score([4,4,4])
+  puts score([5,5,5])
+  puts score([6,6,6])
+
+  puts score([2,5,2,2,3])
+  puts score([5,5,5,5])
+  puts score([1,1,1,1])
+  puts score([1,1,1,1,1])
+  puts score([1,1,1,5,1])
+
